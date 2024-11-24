@@ -42,9 +42,10 @@ def evaluate_model(model, dataset, dataloader):
 
 if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    bert_qa = BertForQAModel(num_labels=2).to(device)
-    bert_qa.load_state_dict(torch.load("./bert_model.bin"))
-    dataset = BertForQADataset('cmrc2018', split='test')
+    bert_qa = BertForQAModel(num_labels=2)
+    bert_qa.load_state_dict(torch.load("./bert_qa_model1.bin"))
+    bert_qa.to(device)
+    dataset = BertForQADataset('./data/cmrc2018', split='test')
     dataloader = DataLoader(dataset, batch_size=8, collate_fn=collate_fn)
     evaluate_model(bert_qa, dataset, dataloader)
 

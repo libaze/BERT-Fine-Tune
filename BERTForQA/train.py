@@ -31,9 +31,10 @@ def train_model(model, train_dataloader, vaild_dataset, valid_dataloader, optimi
         avg, f1, em = evaluate_model(model, vaild_dataset, valid_dataloader)
         print("AVG: {:.4f}, F1: {:.4f}, EM: {:.4f}".format(avg, f1, em))
         scheduler.step()
+        print('current learning rate: ', scheduler.get_last_lr())
         if f1 > best_f1:
             best_f1 = f1
-            torch.save(model.state_dict(), './bert_model1.bin')
+            torch.save(model.state_dict(), './bert_qa_model1.pth')
             print("Best model saved!")
 
 

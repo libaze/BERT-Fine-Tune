@@ -26,7 +26,7 @@ class BertForQAModel(nn.Module):
     def __init__(self, num_labels):
         super(BertForQAModel, self).__init__()
         self.bert = BertModel.from_pretrained('google-bert/bert-base-chinese')
-        self.bert.pooler = nn.Identity()
+        # self.bert.pooler = nn.Identity()
         # for param in self.bert.parameters():
         #     param.requires_grad_(False)
         self.qa_outputs = nn.Linear(in_features=self.bert.config.hidden_size, out_features=num_labels)
