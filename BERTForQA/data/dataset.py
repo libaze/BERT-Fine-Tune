@@ -6,10 +6,8 @@
 @desc   : 
 """
 import concurrent
-
 import torch
 from torch.utils.data import Dataset
-from tqdm import tqdm
 import numpy as np
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
@@ -58,7 +56,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     return ground_true, predictions
 
 
-def process_example(example, ids_to_processed_data, data_offset_mapping, start_logits, end_logits, n_best, max_answer_length):
+def process_example(example, ids_to_processed_data, data_offset_mapping, start_logits, end_logits, n_best=5, max_answer_length=30):
     _id = example['id']
     context = example["context"]
     answers = []
