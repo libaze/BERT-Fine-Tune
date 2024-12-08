@@ -12,4 +12,4 @@ BERT的微调后的权重可以通过以下链接下载：
 - [best_sts_model](https://pan.baidu.com/s/16S3fnzIc1YXqTca3gPF-xw?pwd=ms8s)
 ## 数据集
 本项目使用的文本语义相似度数据集链接如下：
-- [train_pair.json](https://pan.baidu.com/s/1_CTOH6O_UwRcRlFdkB9vFg?pwd=n25r) : train_pair为语义文本相似度任务准备的数据集。
+- [train_pair.json](https://pan.baidu.com/s/1_CTOH6O_UwRcRlFdkB9vFg?pwd=n25r) : train_pair为语义文本相似度任务准备的数据集，包含260w个句子对。
