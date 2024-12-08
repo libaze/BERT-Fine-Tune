@@ -37,9 +37,6 @@ def train_model(model, train_dataloader, vaild_dataset, valid_dataloader, optimi
             best_f1 = f1
             torch.save(model.state_dict(), './bert_qa_model.pth')
             print("Best model saved!")
-        dataset = BertForQADataset('./data/cmrc2018', split='test')
-        dataloader = DataLoader(dataset, batch_size=32, collate_fn=collate_fn)
-        evaluate_model(model, dataset, dataloader)
 
 
 if __name__ == '__main__':
