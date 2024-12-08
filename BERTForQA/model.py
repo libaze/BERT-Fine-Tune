@@ -31,7 +31,7 @@ class BertForQAModel(nn.Module):
         #     param.requires_grad_(False)
         self.qa_outputs = nn.Linear(in_features=self.bert.config.hidden_size, out_features=num_labels)
 
-    def forward(self, input_ids, token_type_ids, attention_mask, start_positions, end_positions, **kwargs):
+    def forward(self, input_ids, token_type_ids, attention_mask, start_positions=None, end_positions=None, **kwargs):
         outputs = self.bert(
             input_ids=input_ids,
             attention_mask=attention_mask,
