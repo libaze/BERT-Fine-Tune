@@ -23,19 +23,17 @@ class BERTForClassification(nn.Module):
     def forward(self, input_ids, token_type_ids, attention_mask):
         # 将输入传递给BERT模型
         outputs = self.bert(
-            input_ids=input_ids,         # 输入的token序列
-            attention_mask=attention_mask, # 指示哪些token是实际token，哪些是padding
-            token_type_ids=token_type_ids  # 区分句子片段的token类型（例如，两个句子的分隔）
+            input_ids=input_ids,            # 输入的token序列
+            attention_mask=attention_mask,  # 指示哪些token是实际token，哪些是padding
+            token_type_ids=token_type_ids   # 区分句子片段的token类型
         )
         # 获取BERT模型的pooler_output，通常用于分类任务
         pooled_output = outputs.pooler_output
         # 应用Dropout层
         pooled_output = self.dropout(pooled_output)
-        # 将dropout后的输出传递给分类器，得到logits
+        # 将dropout后的输出传递给分类器，得到out
         out = self.classifier(pooled_output)
         # out，用于后续的损失计算和分类预测
         return out
 
 
-if __name__ == '__main__':
-    bert = BERTForClassification()

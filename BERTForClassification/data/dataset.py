@@ -17,19 +17,16 @@ def collate_fn(batch):
     # 初始化输入和标签列表
     inputs = []
     labels = []
-
     # 遍历批次中的每个样本
     for text, label in batch:
         # 将文本添加到输入列表
         inputs.append(text)
         # 将标签添加到标签列表
         labels.append(label)
-
     # 使用tokenizer对输入文本进行编码
     # max_length指定最大长度，truncation进行截断，padding进行填充
     # return_tensors='pt'表示返回PyTorch张量
     tokenized_text = tokenizer(inputs, max_length=128, truncation=True, padding='max_length', return_tensors='pt')
-
     # 返回编码后的文本和标签的张量
     return tokenized_text, torch.tensor(labels, dtype=torch.long)
 

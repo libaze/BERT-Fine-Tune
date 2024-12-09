@@ -36,15 +36,14 @@ def cls_predict(sentence):
     class_score_dict = {labels[i]: float(pred_score[i]) for i in range(len(labels))}
     return class_score_dict
 
-# 使用Gradio创建一个Web界面
+
 with gr.Blocks() as demo:
-    # 添加标题
     gr.Markdown('# 情感分析')
     # 添加输入框，用于用户输入评论
     sentence = gr.Text(label='评论')
     # 添加输出标签，用于显示预测结果
     outputs = gr.Label(num_top_classes=2)
-    # 创建接口，将输入输出与sts_predict函数关联起来，并提供示例评论
+    # 创建接口，将输入输出与cls_predict函数关联起来，并提供示例评论
     gr.Interface(fn=cls_predict, inputs=[sentence], outputs=outputs,
                  examples=[
                      ['每次肯定晚至少一个小时，下单了最后没送到，真是醉了，饭也给的死少。不建议大家订餐，如果非要吃，最后提前一天订，第二天再吃'],
@@ -52,6 +51,6 @@ with gr.Blocks() as demo:
                      ['下午五点五十五订餐成功，七点半之后才吃上饭，酸奶连影子都没看到，味道也就那么回事，蒜蓉粉丝娃娃菜油特别大，烧二冬都是淀粉，糊嘴都，以后绝对不定这一家了'],
                  ])
 
-# 当脚本直接运行时，启动Gradio界面
+
 if __name__ == '__main__':
     demo.launch()

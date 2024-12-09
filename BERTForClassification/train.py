@@ -21,9 +21,7 @@ def train(model, train_loader, valid_loader, optimizer, scheduler, loss_fn, epoc
     model.train()
     train_loss = 0  # 初始化训练损失
     best_acc = 0.  # 初始化最佳准确率
-    # 遍历每一个训练轮次
     for epoch in range(epochs):
-        # 使用tqdm显示进度条
         for inputs, labels in tqdm(train_loader):
             # 清空优化器的梯度
             optimizer.zero_grad()
@@ -67,7 +65,7 @@ if __name__ == '__main__':
     # 实例化BERT分类模型，并指定类别数量，然后将模型移动到指定设备
     model = BERTForClassification(num_classes=2).to(device)
 
-    # 加载数据集，这里假设数据集是以特定格式存储的，并且提供了训练集和验证集
+    # 加载数据集
     train_dataset = BertForClassificationDataset('./data/waimai_10k', 'train')
     val_dataset = BertForClassificationDataset('./data/waimai_10k', 'validation')
 
@@ -75,7 +73,7 @@ if __name__ == '__main__':
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
     val_dataloader = DataLoader(val_dataset, batch_size=batch_size * 2, shuffle=False, collate_fn=collate_fn)
 
-    # 定义损失函数，这里使用交叉熵损失函数，适用于分类问题
+    # 定义损失函数，使用交叉熵损失函数
     loss_fn = CrossEntropyLoss()
 
     # 定义优化器，这里使用AdamW优化器，它是Adam优化器的变种，适用于BERT模型

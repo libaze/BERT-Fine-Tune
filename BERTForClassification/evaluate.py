@@ -13,21 +13,20 @@ from data.dataset import BertForClassificationDataset, collate_fn
 
 
 def evaluate(model, test_loader, device):
-    # 将模型设置为评估模式，关闭Dropout和BatchNorm层
+    # 将模型设置为评估模式
     model.eval()
     correct = 0  # 初始化正确预测的数量
     total = 0  # 初始化总的样本数量
     # 在评估过程中不计算梯度
     with torch.no_grad():
-        # 使用tqdm显示进度条
         for inputs, labels in tqdm(test_loader):
-            # 将输入数据移动到指定设备，并移除不必要的维度
+            # 将输入数据移动到指定设备，并压缩不必要的维度
             inputs = {k: v.squeeze(1).to(device) for k, v in inputs.items()}
             labels = labels.to(device)
             # 前向传播，获取模型输出
-            logits = model(**inputs)
+            out = model(**inputs)
             # 获取预测结果，即概率最高的类别索引
-            preds = logits.argmax(dim=-1)
+            preds = out.argmax(dim=-1)
             # 累加总的样本数量
             total += labels.size(0)
             # 累加正确预测的数量

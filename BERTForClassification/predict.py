@@ -48,7 +48,7 @@ if __name__ == '__main__':
     model.to(device)
     # 加载模型权重，这里假设已经有一个训练好的模型权重文件'best_cls_model.pth'
     model.load_state_dict(torch.load('best_cls_model.pth'))
-    # 将模型设置为评估模式，关闭Dropout和BatchNorm层，提高预测的稳定性
+    # 将模型设置为评估模式
     model.eval()
     # 使用模型进行预测，传入一个句子，模型，分词器以及设备信息
     # 打印出预测结果，包括概率分布和预测类别
