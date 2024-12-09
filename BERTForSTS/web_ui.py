@@ -11,26 +11,34 @@ from transformers import BertTokenizer
 from predict import predict
 from model import BertForSTS
 
+
+# 设置分类数量和设备
 num_classes = 2
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# 初始化分词器和模型
 tokenizer = BertTokenizer.from_pretrained('google-bert/bert-base-chinese')
 model = BertForSTS(num_classes=num_classes).to(device)
+# 加载预训练的模型参数
 model.load_state_dict(torch.load('best_sts_model.pth'))
+# 将模型设置为评估模式
 model.eval()
 
 
 def sts_predict(s1, s2):
-    labels = ['不相似', '相似']
+    labels = ['不相似', '相似']  # 分类标签
+    # 调用predict函数获取预测分数和结果
     pred_score, result = predict(s1=s1, s2=s2, model=model, tokenizer=tokenizer, device=device)
+    # 将预测分数和标签对应起来，并转换为浮点数
     class_score_dict = {labels[i]: float(pred_score[i]) for i in range(len(labels))}
     return class_score_dict
 
 
 with gr.Blocks() as demo:
     gr.Markdown('# 语义文本相似度')
-    s1 = gr.Text(label='句子1')
-    s2 = gr.Text(label='句子2')
-    outputs = gr.Label(num_top_classes=2)
+    s1 = gr.Text(label='句子1')  # 创建一个文本输入框，标签为"句子1"
+    s2 = gr.Text(label='句子2')  # 创建一个文本输入框，标签为"句子2"
+    outputs = gr.Label(num_top_classes=2)  # 创建一个输出标签，显示前两个最可能的类别
+    # 创建一个接口，将sts_predict函数与输入输出关联起来，并提供示例
     gr.Interface(fn=sts_predict, inputs=[s1, s2], outputs=outputs,
                  examples=[
                      ['一只狗和一个女人坐在户外咖啡馆里。', '"一个男人和一只猫坐在室内。'],
