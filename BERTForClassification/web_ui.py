@@ -26,7 +26,6 @@ model.load_state_dict(torch.load('best_cls_model.pth'))
 model.eval()
 
 
-# 定义一个函数，用于预测给定句子的情感
 def cls_predict(sentence):
     # 定义标签列表，对应差评和好评
     labels = ['差评', '好评']
