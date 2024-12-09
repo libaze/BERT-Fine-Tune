@@ -31,7 +31,6 @@ model.load_state_dict(torch.load('best_ner_model.pth'))
 model.eval()
 
 
-# 定义一个函数，用于预测给定文本中的命名实体
 def ner_predict(sentence):
     # 调用predict函数获取预测结果，包括处理后的句子和预测的实体标签
     sen, result = predict(sentence=sentence, model=model, tokenizer=tokenizer, device=device, idx_2_label=idx_2_label)
@@ -39,9 +38,7 @@ def ner_predict(sentence):
     return [sen, result]
 
 
-# 使用Gradio创建一个Web界面
 with gr.Blocks() as demo:
-    # 添加标题
     gr.Markdown('# 命名实体识别')
     # 添加输入框，用于用户输入文本
     sentence = gr.Text(label='文本')
