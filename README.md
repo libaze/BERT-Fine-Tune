@@ -6,10 +6,10 @@ BERT的预训练权重可以通过以下链接下载：
 - [bert-base-chinese](https://hf-mirror.com/google-bert/bert-base-chinese)
 ## 微调后的权重
 BERT的微调后的权重可以通过以下链接下载：
-- [best_cls_model](https://pan.baidu.com/s/1TbDFdBPcB9i4kPewUGDfng?pwd=hjf1)
-- [best_ner_model](https://pan.baidu.com/s/1v-tn4h-OBHwM13ka0iVGvg?pwd=d5yc)
-- [best_qa_model](https://pan.baidu.com/s/1fQ-XwkW57HX150jO5Qv6JQ?pwd=ci7r)
-- [best_sts_model](https://pan.baidu.com/s/16S3fnzIc1YXqTca3gPF-xw?pwd=ms8s)
+- [best_cls_model](https://pan.baidu.com/s/13YHU42LEJno8fdZeljm2Vw?pwd=hndb)
+- [best_ner_model](https://pan.baidu.com/s/1da7HBZDjZ98eoGoIzCQORQ?pwd=v7gx)
+- [best_qa_model](https://pan.baidu.com/s/1t5ADYtNuxvVYe5kZ7JSeZQ?pwd=f2b6)
+- [best_sts_model](https://pan.baidu.com/s/12p20ddVx86M8NvN7v5h3DQ?pwd=z978)
 ## 数据集
 本项目使用的文本语义相似度数据集链接如下：
-- [train_pair.json](https://pan.baidu.com/s/1_CTOH6O_UwRcRlFdkB9vFg?pwd=n25r) : train_pair为语义文本相似度任务准备的数据集，包含260w个句子对。
+- [train_pair.json](https://pan.baidu.com/s/1ZggXiOtz50RZRKOTY-EAdw?pwd=g4vv) : train_pair为语义文本相似度任务准备的数据集，包含260w个句子对。
