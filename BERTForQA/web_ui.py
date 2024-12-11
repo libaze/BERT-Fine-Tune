@@ -11,21 +11,27 @@ from transformers import AutoTokenizer
 from model import BertForQAModel
 from predict import predict
 
+# 加载预训练的分词器和模型
 tokenizer = AutoTokenizer.from_pretrained('google-bert/bert-base-chinese')
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 bert_qa = BertForQAModel(num_labels=2).to(device)
-bert_qa.load_state_dict(torch.load("./bert_qa_model.pth"))
+bert_qa.load_state_dict(torch.load("./bert_qa_model.pth"))  # 加载模型参数
 
 
+# 定义一个函数，用于预测给定问题和上下文中的答案
 def qa_predict(question: str, context: str):
     answer = predict(question=question, context=context, model=bert_qa, tokenizer=tokenizer, device=device)
     return answer
 
 
 with gr.Blocks() as demo:
+    gr.Markdown('# 问答任务')
+    # 创建输入组件：问题、上下文
     question = gr.Text(label='问题')
     context = gr.Text(label='上下文')
+    # 创建输出组件：答案
     answer = gr.Text(label='答案')
+    # 创建接口，将输入组件和输出组件关联起来，并提供示例
     gr.Interface(qa_predict, [question, context], [answer], examples=[
         ['联合国教科文组织保护非物质文化遗产政府间委员会第19届常会在哪里举行的？', ''''2024年12月4日，中国申报的“春节——中国人庆祝传统新年的社会实践”在巴拉圭亚松森举行的联合国教科文组织保护非物质文化遗产政府间委员会第19届常会上通过评审，列入联合国教科文组织人类非物质文化遗产代表作名录。
 2024年12月5日，黎族传统纺染织绣技艺、羌年和中国木拱桥传统营造技艺从急需保护的非物质文化遗产名录转入人类非物质文化遗产代表作名录。
